@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "api-gateway",
+      "path": "api-gateway"
+    },
+    {
+      "name": "order-service",
+      "path": "order-service"
+    },
+    {
+      "name": "payment-service",
+      "path": "payment-service"
+    },
+    {
+      "name": "frontend",
+      "path": "frontend"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "typescript.preferences.importModuleSpecifier": "relative"
+  }
+}

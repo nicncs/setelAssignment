@@ -1,0 +1,136 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Orders'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card">
+                <h3
+                    class="card-header text-center font-weight-bold text-uppercase py-4"
+                >
+                    Orders
+                </h3>
+                <div class="card-body">
+                    <div id="table" class="table-editable">
+                        <span class="table-add float-right mb-3 mr-2">
+                            <a class="text-success" (click)="add()">
+                                <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                            </a>
+                        </span>
+                        <table
+                            mdbTable
+                            #tableEl="mdbTable"
+                            class="z-depth-1"
+                            hover="true"
+                        >
+                            <thead class="black white-text">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Article</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Options</th>
+                                    <th>State</th>
+                                    <th>Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of orders; let i = index">
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                        scope="row"
+                                    >
+                                        {{ i }}
+                                    </td>
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                    >
+                                        {{ order.article }}
+                                    </td>
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                    >
+                                        {{ order.quantity }}
+                                    </td>
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                    >
+                                        {{ order.price }}
+                                    </td>
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                    >
+                                        {{ order.options }}
+                                    </td>
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                    >
+                                        {{ order.state }}
+                                    </td>
+                                    <td
+                                        *ngIf="
+                                            i + 1 >=
+                                                mdbTablePagination.firstItemIndex &&
+                                            i < mdbTablePagination.lastItemIndex
+                                        "
+                                    >
+                                        <span class="table-remove">
+                                            <button
+                                                type="button"
+                                                mdbBtn
+                                                color="danger"
+                                                rounded="true"
+                                                size="sm"
+                                                class="my-0"
+                                                (click)="cancel(order._id)"
+                                                [disabled]="
+                                                    order.state ===
+                                                        'delivered' ||
+                                                    order.state === 'cancelled'
+                                                "
+                                            >
+                                                Cancel
+                                            </button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="grey lighten-5 w-100">
+                                <tr>
+                                    <td colspan="12">
+                                        <mdb-table-pagination
+                                            [tableEl]="tableEl"
+                                            [searchDataSource]="orders"
+                                        ></mdb-table-pagination>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+version: "3.1"
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+    - "27017:27017"
+    restart: always
+    volumes:
+      - dbdata:/data/db
+
+  order-app:
+    container_name: order-app-frontend
+    restart: always
+    build: ./frontend
+    ports:
+      - "4000:80"
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    container_name: api-gateway
+    restart: always
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      ORDER_SERVICE_HOST: order-service
+      ORDER_SERVICE_PORT: 3001
+      PAYMENT_SERVICE_HOST: payment-service
+      PAYMENT_SERVICE_PORT: 3002
+    depends_on:
+      - order-service
+
+  order-service:
+    container_name: order-service
+    restart: always
+    build: ./order-service
+    environment:
+      MONGO_URL: mongodb://mongo:27017/orderapp
+      PAYMENT_SERVICE_HOST: payment-service
+      PAYMENT_SERVICE_PORT: 3002
+    depends_on:
+      - mongo
+      - payment-service
+
+  payment-service:
+    container_name: payment-service
+    restart: always
+    build: ./payment-service
+
+volumes:
+  dbdata:

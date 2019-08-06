@@ -1,0 +1,45 @@
+<div [@routerTransition]>
+    <app-page-header
+        [heading]="'Services'"
+        [icon]="'fa-server'"
+    ></app-page-header>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card">
+                <h3
+                    class="card-header text-center font-weight-bold text-uppercase py-4"
+                >
+                    Services
+                </h3>
+                <div class="card-body">
+                    <table
+                        mdbTable
+                        #tableEl="mdbTable"
+                        class="z-depth-1"
+                        hover="true"
+                    >
+                        <thead class="black white-text">
+                            <tr>
+                                <th>Name</th>
+                                <th>Online</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let service of services | keyvalue">
+                                <td>{{ service.key }}</td>
+                                <td *ngIf="service.value; else elseBlock">
+                                    <p class="text-primary">true</p>
+                                </td>
+                                <ng-template #elseBlock
+                                    ><td>
+                                        <p class="text-danger">false</p>
+                                    </td></ng-template
+                                >
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
